@@ -1,0 +1,48 @@
+---
+const NAV = [
+  ["Inicio",          "#inicio"],
+  ["Nuestro Servicio","#servicio"],
+  ["Nosotros",        "#nosotros"],
+  ["Nuestros Planes", "#planes"],
+  ["Contáctanos",     "#contacto"],
+];
+---
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a href="#inicio">
+      <span class="logo">
+        <span class="brand-mi">Mi</span><span class="brand-fc">Forecast</span><span class="dot">.com</span>
+      </span>
+    </a>
+    <nav class="nav">
+      {NAV.map(([label, href]) => <a href={href}>{label}</a>)}
+    </nav>
+    <div class="hdr-cta">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <a class="access" href="https://app.miforecast.com" target="_blank" rel="noopener">
+        Acceso Clientes
+      </a>
+      <a class="btn btn-primary" href="https://app.miforecast.com/registro.html" target="_blank" rel="noopener">
+        Pruébalo gratis
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  btn?.addEventListener('click', () => {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('mf-theme', next);
+  });
+</script>

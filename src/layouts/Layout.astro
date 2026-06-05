@@ -1,0 +1,88 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "MiForecast | Forecasting de Ventas B2B con Inteligencia Artificial",
+  description = "MiForecast usa IA para priorizar tus oportunidades de venta, predecir tu forecast y eliminar la carga administrativa del CRM. Diseñado para equipos comerciales B2B.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Primary SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content="forecasting ventas, forecast B2B, CRM alternativa, inteligencia comercial, predicción ventas, pipeline ventas, software ventas B2B, IA ventas" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://miforecast.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://miforecast.com/" />
+  <meta property="og:title" content="MiForecast | Forecasting de Ventas B2B con IA" />
+  <meta property="og:description" content="Menos administración. Más ventas. MiForecast prioriza tu pipeline con IA y predice tus ventas con precisión." />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:site_name" content="MiForecast" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MiForecast | Forecasting de Ventas B2B con IA" />
+  <meta name="twitter:description" content="Menos administración. Más ventas. MiForecast prioriza tu pipeline con IA." />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "MiForecast",
+    "url": "https://miforecast.com",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Plataforma SaaS de inteligencia comercial que usa IA para priorizar oportunidades de venta y predecir el forecast en equipos B2B.",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "lowPrice": "9.80",
+      "highPrice": "14.90",
+      "offerCount": "3"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "MiForecast",
+      "url": "https://miforecast.com"
+    }
+  }
+  </script>
+
+  <!-- Theme init (before paint to avoid flash) -->
+  <script is:inline>
+    (function () {
+      var stored = localStorage.getItem('mf-theme');
+      var prefer = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', stored || prefer);
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <slot />
+  <script>
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+---
+const CX = 245, CY = 260;
+
+// Puntos para el mini chart de forecast
+const real = [0.34, 0.42, 0.38, 0.52, 0.60, 0.57, 0.71];
+const pred = [0.71, 0.79, 0.86, 0.95];
+const cw = 260, ch = 58, px = 4, py = 5;
+const iw = cw - px * 2, ih = ch - py * 2;
+const n = real.length + pred.length - 2;
+const X = (i: number) => (px + iw * i / n).toFixed(1);
+const Y = (v: number) => (py + ih * (1 - v)).toFixed(1);
+const off = real.length - 1;
+const ptsReal = real.map((v, i) => `${X(i)},${Y(v)}`).join(' ');
+const ptsPred = pred.map((v, i) => `${X(off + i)},${Y(v)}`).join(' ');
+const areaD   = `M${X(0)},${Y(real[0])} L${ptsReal} L${X(off)},${ch - py} L${px},${ch - py} Z`;
+const divX    = X(off);
+
+const OPPS = [
+  { name: "TechSolutions",    prob: 84, val: "$135K" },
+  { name: "Grupo Industrial", prob: 72, val: "$98K"  },
+  { name: "Logística Andina", prob: 65, val: "$80K"  },
+];
+---
+
+<section id="servicio" class="sec reveal" style="padding: 64px 0">
+  <div class="sec-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 860" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sv1" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stop-color="#2f9e44" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#1f6fe5" stop-opacity="0.08"/>
+        </linearGradient>
+      </defs>
+      <!-- Horizontal grid lines -->
+      <line x1="0" y1="172" x2="1440" y2="172" stroke="#1f6fe5" stroke-width="0.5" stroke-opacity="0.05"/>
+      <line x1="0" y1="344" x2="1440" y2="344" stroke="#1f6fe5" stroke-width="0.5" stroke-opacity="0.05"/>
+      <line x1="0" y1="516" x2="1440" y2="516" stroke="#1f6fe5" stroke-width="0.5" stroke-opacity="0.05"/>
+      <line x1="0" y1="688" x2="1440" y2="688" stroke="#1f6fe5" stroke-width="0.5" stroke-opacity="0.05"/>
+      <!-- Scatter plot (left area) — upward trend -->
+      <circle cx="60"  cy="720" r="3.5" fill="#2f9e44" fill-opacity="0.20"/>
+      <circle cx="110" cy="695" r="2.5" fill="#1f6fe5" fill-opacity="0.18"/>
+      <circle cx="155" cy="670" r="4"   fill="#2f9e44" fill-opacity="0.20"/>
+      <circle cx="210" cy="640" r="2.5" fill="#1f6fe5" fill-opacity="0.18"/>
+      <circle cx="260" cy="618" r="3"   fill="#2f9e44" fill-opacity="0.22"/>
+      <circle cx="320" cy="590" r="3.5" fill="#1f6fe5" fill-opacity="0.18"/>
+      <circle cx="370" cy="565" r="2.5" fill="#2f9e44" fill-opacity="0.20"/>
+      <circle cx="425" cy="540" r="4"   fill="#1f6fe5" fill-opacity="0.18"/>
+      <circle cx="480" cy="515" r="3"   fill="#2f9e44" fill-opacity="0.22"/>
+      <circle cx="530" cy="490" r="2.5" fill="#1f6fe5" fill-opacity="0.18"/>
+      <circle cx="580" cy="465" r="3.5" fill="#2f9e44" fill-opacity="0.20"/>
+      <!-- Trend line through scatter -->
+      <line x1="40" y1="740" x2="620" y2="430" stroke="#1f6fe5" stroke-width="1.2" stroke-opacity="0.12" stroke-dasharray="6 8"/>
+      <!-- Scatter right side -->
+      <circle cx="860"  cy="680" r="3"   fill="#1f6fe5" fill-opacity="0.15"/>
+      <circle cx="930"  cy="645" r="2.5" fill="#2f9e44" fill-opacity="0.15"/>
+      <circle cx="1000" cy="610" r="3.5" fill="#1f6fe5" fill-opacity="0.15"/>
+      <circle cx="1070" cy="575" r="2.5" fill="#2f9e44" fill-opacity="0.15"/>
+      <circle cx="1140" cy="540" r="3"   fill="#1f6fe5" fill-opacity="0.15"/>
+      <circle cx="1210" cy="500" r="3.5" fill="#2f9e44" fill-opacity="0.15"/>
+      <circle cx="1280" cy="465" r="2.5" fill="#1f6fe5" fill-opacity="0.15"/>
+      <circle cx="1350" cy="430" r="3"   fill="#2f9e44" fill-opacity="0.15"/>
+      <line x1="840" y1="700" x2="1380" y2="410" stroke="#2f9e44" stroke-width="1" stroke-opacity="0.10" stroke-dasharray="5 8"/>
+      <!-- Corner bar chart bottom-right -->
+      <rect x="1260" y="740" width="20" height="120" fill="#1f6fe5" fill-opacity="0.06"/>
+      <rect x="1290" y="710" width="20" height="150" fill="#1f6fe5" fill-opacity="0.08"/>
+      <rect x="1320" y="680" width="20" height="180" fill="#2f9e44" fill-opacity="0.08"/>
+      <rect x="1350" y="650" width="20" height="210" fill="#2f9e44" fill-opacity="0.10"/>
+      <rect x="1380" y="620" width="20" height="240" fill="#2f9e44" fill-opacity="0.10"/>
+      <rect x="1410" y="590" width="20" height="270" fill="#2f9e44" fill-opacity="0.08"/>
+    </svg>
+  </div>
+  <div class="wrap">
+
+    <div class="sec-head center">
+      <span class="kicker-tag">Nuestro Servicio</span>
+      <h2>De tus datos<br />a resultados que cierran negocios</h2>
+      <p>MiForecast conecta tus señales comerciales y las convierte en las capacidades que tu equipo necesita para vender más.</p>
+    </div>
+
+    <div class="servicio-grid" style="margin-top:48px">
+
+      <div class="sfunnel-col">
+        <svg id="sfunnel-svg" viewBox="0 0 400 560" width="100%"
+             style="display:block;overflow:visible" class="sfunnel-svg">
+          <defs>
+            <radialGradient id="sfglow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(31,111,229,.5)" />
+              <stop offset="100%" stop-color="rgba(31,111,229,0)" />
+            </radialGradient>
+          </defs>
+          <g id="svc-in-lines"></g>
+          <g id="svc-out-lines"></g>
+          <g id="svc-center-node">
+            <circle cx={CX} cy={CY} r="52" fill="url(#sfglow)" />
+            <circle cx={CX} cy={CY} r="34" fill="rgba(31,111,229,.07)" stroke="rgba(31,111,229,.18)" stroke-width="1">
+              <animate attributeName="r" values="34;38;34" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx={CX} cy={CY} r="21" fill="rgba(31,111,229,.14)" stroke="rgba(31,111,229,.4)" stroke-width="1.5" />
+            <path d={`M${CX},${CY-14} L${CX+3.5},${CY-3.5} L${CX+14},${CY} L${CX+3.5},${CY+3.5} L${CX},${CY+14} L${CX-3.5},${CY+3.5} L${CX-14},${CY} L${CX-3.5},${CY-3.5} Z`}
+              fill="#c4b5fd">
+              <animate attributeName="opacity" values="0.9;0.55;0.9" dur="2.5s" repeatCount="indefinite" />
+            </path>
+            <circle cx={CX} cy={CY} r="3" fill="#fff">
+              <animate attributeName="r" values="3;4.2;3" dur="2.5s" repeatCount="indefinite" />
+            </circle>
+            <text x={CX} y={CY + 30} text-anchor="middle" font-size="10"
+              font-family="Roboto, system-ui, sans-serif" font-weight="800" letter-spacing="-0.3">
+              <tspan fill="#2f9e44">Mi</tspan><tspan fill="#1f6fe5">Forecast</tspan>
+            </text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="feat-stack" id="feat-stack">
+
+        <!-- Card 1: IA que prioriza → grilla de oportunidades -->
+        <div class="feat-output">
+          <div class="feat-output-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><path d="M3 17l5-5 4 3 6-7M21 8V4h-4" /></svg>
+          </div>
+          <div style="width:100%">
+            <h3>IA que prioriza</h3>
+            <p>La IA analiza cada oportunidad y la clasifica según su probabilidad real de cierre. Sin suposiciones.</p>
+            <div class="feat-preview">
+              <div class="fprv-label">Oportunidades rankeadas <span class="fprv-ai-badge">IA activa</span></div>
+              <div class="fprv-table">
+                {OPPS.map(({ name, prob, val }, i) => (
+                  <div class="fprv-row">
+                    <span class={`fprv-rank fprv-rank-${i + 1}`}>{i + 1}</span>
+                    <span class="fprv-name">{name}</span>
+                    <div class="fprv-prob">
+                      <div class="fprv-bar-track">
+                        <div class="fprv-bar-fill" style={`width:${prob}%;background:${prob >= 75 ? '#5fd07f' : '#f5bd4f'}`}></div>
+                      </div>
+                      <span style={`color:${prob >= 75 ? '#5fd07f' : '#f5bd4f'};font-size:10px;font-weight:700;min-width:26px;text-align:right`}>{prob}%</span>
+                    </div>
+                    <span class="fprv-val">{val}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Forecasting predecible → mini chart -->
+        <div class="feat-output">
+          <div class="feat-output-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>
+          </div>
+          <div style="width:100%">
+            <h3>Forecasting predecible</h3>
+            <p>Proyección por etapas del pipeline (Solution Selling). Sabes cuánto facturarás antes de que termine el mes.</p>
+            <div class="feat-preview">
+              <div class="fprv-chart-head">
+                <span class="fprv-label">Proyección de Ventas</span>
+                <span class="fprv-metric">$2.45M <span style="color:#5fd07f;font-size:10px;font-weight:700">▲ +24%</span></span>
+              </div>
+              <svg viewBox={`0 0 ${cw} ${ch}`} width="100%" style="display:block;margin-top:8px">
+                <defs>
+                  <linearGradient id="fcArea2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1f6fe5" stop-opacity="0.22" />
+                    <stop offset="100%" stop-color="#1f6fe5" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <path d={areaD} fill="url(#fcArea2)" />
+                <polyline points={ptsReal} fill="none" stroke="#1f6fe5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                <polyline points={ptsPred} fill="none" stroke="#5fd07f" stroke-width="1.8" stroke-dasharray="3 3" stroke-linecap="round" stroke-linejoin="round" />
+                <line x1={divX} y1={py} x2={divX} y2={ch - py} stroke="rgba(255,255,255,.14)" stroke-width="1" stroke-dasharray="2 2" />
+                <circle cx={X(off)} cy={Y(real[real.length-1])} r="2.5" fill="#1f6fe5" stroke="#070c18" stroke-width="1.2" />
+                <circle cx={X(n)} cy={Y(pred[pred.length-1])} r="3" fill="#5fd07f" stroke="#070c18" stroke-width="1.2" />
+              </svg>
+              <div class="fprv-legend">
+                <span><i style="background:#1f6fe5"></i>Real</span>
+                <span><i style="background:#5fd07f"></i>Proyección IA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Visibilidad por rol → dos paneles -->
+        <div class="feat-output">
+          <div class="feat-output-ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5" /></svg>
+          </div>
+          <div style="width:100%">
+            <h3>Visibilidad por rol</h3>
+            <p>Cada rol ve exactamente lo que necesita para decidir y actuar.</p>
+            <div class="feat-preview">
+              <div class="fprv-roles">
+                <div class="fprv-role">
+                  <div class="fprv-role-badge">Vendedor</div>
+                  <div class="fprv-role-val">$318K</div>
+                  <div class="fprv-role-sub">forecast personal</div>
+                  <div class="fprv-bar-track" style="margin-top:8px">
+                    <div class="fprv-bar-fill" style="width:78%;background:#1f6fe5"></div>
+                  </div>
+                  <div class="fprv-role-meta">
+                    <span class="fprv-role-pct" style="color:#4d91f5">78%</span>
+                    <span class="fprv-role-detail">meta individual</span>
+                  </div>
+                  <div class="fprv-role-opps">3 oportunidades prioritarias</div>
+                </div>
+                <div class="fprv-role-divider"></div>
+                <div class="fprv-role">
+                  <div class="fprv-role-badge mgr">Gerente</div>
+                  <div class="fprv-role-val">$1.2M</div>
+                  <div class="fprv-role-sub">forecast del equipo</div>
+                  <div class="fprv-bar-track" style="margin-top:8px">
+                    <div class="fprv-bar-fill" style="width:87%;background:#5fd07f"></div>
+                  </div>
+                  <div class="fprv-role-meta">
+                    <span class="fprv-role-pct" style="color:#5fd07f">87%</span>
+                    <span class="fprv-role-detail">meta del equipo</span>
+                  </div>
+                  <div class="fprv-role-opps">8 vendedores activos</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const INPUTS = [
+    { label: "Historial de ventas", col: "#2f9e44", dc: "#5fd07f", dur: 1.8, delay: 0   },
+    { label: "Datos de compras",    col: "#2f9e44", dc: "#5fd07f", dur: 1.5, delay: 0.3 },
+    { label: "Pipeline activo",     col: "#2f9e44", dc: "#5fd07f", dur: 1.2, delay: 0.6 },
+  ];
+  const OUTPUTS = [
+    { dur: 1.4, delay: 0.1  },
+    { dur: 1.6, delay: 0.4  },
+    { dur: 1.3, delay: 0.25 },
+  ];
+  const CX = 245, CY = 260;
+  const NS = 'http://www.w3.org/2000/svg';
+
+  function makePath(attrs) {
+    const el = document.createElementNS(NS, 'path');
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    return el;
+  }
+  function makeCircle(attrs) {
+    const el = document.createElementNS(NS, 'circle');
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    return el;
+  }
+  function makeText(attrs, content) {
+    const el = document.createElementNS(NS, 'text');
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    el.textContent = content;
+    return el;
+  }
+  function makeAnim(path, dur, delay) {
+    const el = document.createElementNS(NS, 'animateMotion');
+    el.setAttribute('path', path);
+    el.setAttribute('dur', `${dur}s`);
+    el.setAttribute('repeatCount', 'indefinite');
+    el.setAttribute('begin', `${delay}s`);
+    return el;
+  }
+
+  function recalc() {
+    const svg   = document.getElementById('sfunnel-svg');
+    const cards = document.querySelectorAll('#feat-stack .feat-output');
+    if (!svg || cards.length < 3) return;
+    const sr = svg.getBoundingClientRect();
+    if (!sr.width) return;
+    const scale    = 400 / sr.width;
+    const inLines  = document.getElementById('svc-in-lines');
+    const outLines = document.getElementById('svc-out-lines');
+    const node     = document.getElementById('svc-center-node');
+    if (!inLines || !outLines || !node) return;
+    const cardData = Array.from(cards).map(card => {
+      const cr = card.getBoundingClientRect();
+      return { x: (cr.left - sr.left) * scale, y: (cr.top + cr.height / 2 - sr.top) * scale };
+    });
+    const eCY = (cardData[0].y + cardData[cardData.length - 1].y) / 2;
+    node.setAttribute('transform', `translate(0, ${eCY - CY})`);
+    inLines.innerHTML = outLines.innerHTML = '';
+    cardData.forEach(({ x, y }, i) => {
+      const { label, col, dc, dur: id, delay: idel } = INPUTS[i];
+      const inD = `M100,${y} C165,${y} 220,${eCY} ${CX},${eCY}`;
+      const ig  = document.createElementNS(NS, 'g');
+      const idot = makeCircle({ r: '2.8', fill: dc });
+      idot.appendChild(makeAnim(inD, id, idel));
+      ig.appendChild(makePath({ d: inD, fill: 'none', stroke: col, 'stroke-width': '1.2', opacity: '0.28' }));
+      ig.appendChild(idot);
+      ig.appendChild(makeCircle({ cx: '100', cy: String(y), r: '4', fill: col, opacity: '0.45' }));
+      ig.appendChild(makeText({ x: '94', y: String(y + 4), 'text-anchor': 'end', 'font-size': '10',
+        'font-family': 'Roboto, system-ui, sans-serif', fill: '#4a6078', 'font-weight': '500' }, label));
+      inLines.appendChild(ig);
+      const { dur: od, delay: odel } = OUTPUTS[i];
+      const outD = `M${CX},${eCY} C${CX + 60},${eCY} ${x - 30},${y} ${x},${y}`;
+      const og   = document.createElementNS(NS, 'g');
+      const odot = makeCircle({ r: '2.8', fill: '#4d91f5' });
+      odot.appendChild(makeAnim(outD, od, odel));
+      og.appendChild(makePath({ d: outD, fill: 'none', stroke: '#1f6fe5', 'stroke-width': '1.2', opacity: '0.35' }));
+      og.appendChild(odot);
+      outLines.appendChild(og);
+    });
+  }
+
+  recalc();
+  window.addEventListener('resize', recalc);
+</script>

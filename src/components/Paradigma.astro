@@ -1,0 +1,149 @@
+---
+const BEFORE = [
+  "Horas de trabajo manual y datos desactualizados",
+  "Información dispersa y difícil de analizar",
+  "Sin visibilidad clara del futuro",
+  "Decisiones basadas en intuición",
+];
+const AFTER = [
+  "IA que trabaja por ti y mantiene todo actualizado",
+  "Información centralizada y accionable",
+  "Predicciones confiables de tus ventas futuras",
+  "Decisiones basadas en datos, no en corazonadas",
+];
+const LINES = [
+  { y: 28,  dur: 1.5, delay: 0    },
+  { y: 60,  dur: 1.2, delay: 0.3  },
+  { y: 92,  dur: 1.0, delay: 0.6  },
+  { y: 124, dur: 1.3, delay: 0.15 },
+  { y: 156, dur: 1.1, delay: 0.45 },
+];
+const cx = 150, cy = 110;
+---
+
+<section class="pflow-section reveal">
+  <div class="sec-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 340" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="pb1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f4655a" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#f4655a" stop-opacity="0.02"/>
+        </linearGradient>
+        <linearGradient id="pb2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2f9e44" stop-opacity="0.20"/>
+          <stop offset="100%" stop-color="#2f9e44" stop-opacity="0.02"/>
+        </linearGradient>
+      </defs>
+      <!-- Left bars (antes — rojos/bajos) -->
+      <rect x="18"  y="200" width="32" height="140" fill="url(#pb1)"/>
+      <rect x="64"  y="180" width="32" height="160" fill="url(#pb1)"/>
+      <rect x="110" y="210" width="32" height="130" fill="url(#pb1)"/>
+      <rect x="156" y="175" width="32" height="165" fill="url(#pb1)"/>
+      <rect x="202" y="195" width="32" height="145" fill="url(#pb1)"/>
+      <rect x="248" y="168" width="32" height="172" fill="url(#pb1)"/>
+      <rect x="294" y="185" width="32" height="155" fill="url(#pb1)"/>
+      <!-- Right bars (con MiForecast — verdes/altos) -->
+      <rect x="1000" y="175" width="32" height="165" fill="url(#pb2)"/>
+      <rect x="1048" y="150" width="32" height="190" fill="url(#pb2)"/>
+      <rect x="1096" y="162" width="32" height="178" fill="url(#pb2)"/>
+      <rect x="1144" y="130" width="32" height="210" fill="url(#pb2)"/>
+      <rect x="1192" y="145" width="32" height="195" fill="url(#pb2)"/>
+      <rect x="1240" y="115" width="32" height="225" fill="url(#pb2)"/>
+      <rect x="1288" y="100" width="32" height="240" fill="url(#pb2)"/>
+      <rect x="1336" y="82"  width="32" height="258" fill="url(#pb2)"/>
+      <rect x="1384" y="68"  width="32" height="272" fill="url(#pb2)"/>
+      <!-- Center divider line -->
+      <line x1="720" y1="40" x2="720" y2="340" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="pflow-grid">
+
+      <!-- Antes -->
+      <div class="pflow-card pflow-before">
+        <div class="pflow-title">
+          <span class="pflow-badge bad">Antes</span>
+          CRM tradicional
+        </div>
+        <ul class="pflow-list">
+          {BEFORE.map((t) => (
+            <li class="pflow-item bad">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round"
+                style="width:15px;height:15px;flex:none;margin-top:1px;color:#f4655a">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+              {t}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Animación central -->
+      <div class="pflow-svg-wrap">
+        <svg viewBox="0 0 300 192" width="100%" style="overflow:visible;display:block">
+          <defs>
+            <radialGradient id="pglow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(31,111,229,.55)" />
+              <stop offset="100%" stop-color="rgba(31,111,229,0)" />
+            </radialGradient>
+            <radialGradient id="pglow2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(99,102,241,.4)" />
+              <stop offset="100%" stop-color="rgba(99,102,241,0)" />
+            </radialGradient>
+          </defs>
+
+          {LINES.map(({ y, dur, delay }) => {
+            const path = `M0,${y} C70,${y} 120,${cy} ${cx},${cy}`;
+            return (
+              <g>
+                <path d={path} fill="none" stroke="#f4655a" stroke-width="1.2" opacity="0.35" />
+                <circle r="2.8" fill="#f4655a" opacity="0.9">
+                  <animateMotion dur={`${dur}s`} repeatCount="indefinite" begin={`${delay}s`} path={path} />
+                </circle>
+              </g>
+            );
+          })}
+
+          <path d={`M${cx + 2},${cy} L290,${cy}`} fill="none" stroke="#1f6fe5" stroke-width="2" />
+          <polygon points={`290,${cy - 5} 300,${cy} 290,${cy + 5}`} fill="#1f6fe5" />
+
+          <circle cx={cx} cy={cy} r="44" fill="url(#pglow)" />
+          <circle cx={cx} cy={cy} r="30" fill="url(#pglow2)" />
+          <circle cx={cx} cy={cy} r="24" fill="rgba(99,102,241,.08)" stroke="rgba(99,102,241,.25)" stroke-width="1">
+            <animate attributeName="r" values="24;28;24" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <circle cx={cx} cy={cy} r="15" fill="rgba(99,102,241,.15)" stroke="rgba(120,113,246,.5)" stroke-width="1.5" />
+          <path d={`M${cx},${cy-15} L${cx+3.5},${cy-3.5} L${cx+15},${cy} L${cx+3.5},${cy+3.5} L${cx},${cy+15} L${cx-3.5},${cy+3.5} L${cx-15},${cy} L${cx-3.5},${cy-3.5} Z`}
+            fill="#c4b5fd" opacity="0.95">
+            <animate attributeName="opacity" values="0.95;0.6;0.95" dur="2s" repeatCount="indefinite" />
+          </path>
+          <circle cx={cx} cy={cy} r="3" fill="#fff" opacity="0.9">
+            <animate attributeName="r" values="3;4.5;3" dur="2s" repeatCount="indefinite" />
+          </circle>
+        </svg>
+      </div>
+
+      <!-- Ahora -->
+      <div class="pflow-card pflow-after">
+        <div class="pflow-title">
+          <span class="pflow-badge good">Con</span>
+          MiForecast
+        </div>
+        <ul class="pflow-list">
+          {AFTER.map((t) => (
+            <li class="pflow-item good">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"
+                style="width:15px;height:15px;flex:none;margin-top:1px;color:#2f9e44">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+              {t}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>

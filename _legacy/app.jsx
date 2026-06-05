@@ -39,10 +39,12 @@ function App() {
       <Header />
       <main>
         <Hero variant={t.heroVariant} accent={t.accent} green={GREEN} />
-        <Nosotros />
+        <LogoStrip />
+        <Paradigma />
         <Servicio />
         <Showcase accent={t.accent} green={GREEN} />
         <Planes />
+        <Nosotros />
         <CtaBand />
         <Contacto />
       </main>

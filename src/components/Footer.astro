@@ -1,0 +1,44 @@
+---
+const NAV = [
+  ["Inicio",          "#inicio"],
+  ["Nosotros",        "#nosotros"],
+  ["Nuestro Servicio","#servicio"],
+  ["Nuestros Planes", "#planes"],
+  ["Contáctanos",     "#contacto"],
+];
+const year = new Date().getFullYear();
+---
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-top">
+      <div>
+        <span class="logo ftr-logo">
+          <span class="brand-mi">Mi</span><span class="brand-fc">Forecast</span><span class="dot">.com</span>
+        </span>
+        <p class="ftr-tag">
+          El propósito de MiForecast.com es ser SIMPLE y EFICAZ.
+          Pronóstico de ventas B2B basado en Solution Selling.
+        </p>
+      </div>
+      <div class="ftr-nav">
+        <div class="ftr-col">
+          <h5>Navegación</h5>
+          {NAV.map(([label, href]) => <a href={href}>{label}</a>)}
+        </div>
+        <div class="ftr-col">
+          <h5>Contacto</h5>
+          <a href="mailto:ventas@miforecast.com">ventas@miforecast.com</a>
+          <a href="mailto:soporte@miforecast.com">soporte@miforecast.com</a>
+          <a href="https://app.miforecast.com" target="_blank" rel="noopener">Acceso Clientes</a>
+        </div>
+      </div>
+    </div>
+    <div class="ftr-bot">
+      <span>© {year} MiForecast.com</span>
+      <a href="https://miforecast.com/wp/terminos-y-condiciones-de-uso/" target="_blank" rel="noopener">
+        Términos y Condiciones de Uso
+      </a>
+    </div>
+  </div>
+</footer>

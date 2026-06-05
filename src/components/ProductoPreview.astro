@@ -1,0 +1,472 @@
+---
+const KPIS = [
+  { label: "Pipeline Total",   val: "$3.2M",  delta: "+18%", up: true },
+  { label: "Forecast del Mes", val: "$890K",  delta: "+24%", up: true },
+  { label: "Tasa de Cierre",   val: "34%",    delta: "+6%",  up: true },
+  { label: "Días al Cierre",   val: "18 días",delta: "-3",   up: true },
+];
+
+const STAGES = [
+  { name: "Prospección",  val: "$820K", pct: 100, count: 18, col: "rgba(31,111,229,.45)" },
+  { name: "Calificación", val: "$640K", pct: 78,  count: 12, col: "rgba(31,111,229,.62)" },
+  { name: "Propuesta",    val: "$430K", pct: 52,  count: 8,  col: "rgba(31,111,229,.78)" },
+  { name: "Negociación",  val: "$280K", pct: 34,  count: 5,  col: "#1f6fe5"              },
+  { name: "Cierre est.",  val: "$175K", pct: 21,  count: 3,  col: "#2f9e44"              },
+];
+
+const OPPS = [
+  { rank: 1, name: "TechSolutions",    stage: "Negociación",  prob: 84, val: "$135K", c: "hot"  },
+  { rank: 2, name: "Grupo Industrial", stage: "Propuesta",    prob: 72, val: "$98K",  c: "hot"  },
+  { rank: 3, name: "Logística Andina", stage: "Propuesta",    prob: 65, val: "$80K",  c: "warm" },
+  { rank: 4, name: "RetailPlus",       stage: "Calificación", prob: 51, val: "$62K",  c: "warm" },
+  { rank: 5, name: "ConstCorp SA",     stage: "Propuesta",    prob: 38, val: "$45K",  c: "cold" },
+  { rank: 6, name: "MedTech Chile",    stage: "Calificación", prob: 29, val: "$38K",  c: "cold" },
+];
+---
+
+<section class="sec pp-section reveal" id="producto">
+  <div class="wrap">
+
+    <div class="sec-head center">
+      <span class="kicker-tag">El producto en acción</span>
+      <h2>Esto es lo que ve tu equipo<br />todos los días</h2>
+      <p>No describimos el producto — te lo mostramos.</p>
+    </div>
+
+    <div class="pp-window">
+
+      <!-- Chrome bar -->
+      <div class="pp-chrome">
+        <div class="pp-dots">
+          <span class="dot3 r"></span>
+          <span class="dot3 y"></span>
+          <span class="dot3 g"></span>
+        </div>
+        <span class="pp-addr">app.miforecast.com — Panel de Ventas</span>
+        <div class="pp-tabs">
+          <span class="pp-tab active">Gerente</span>
+          <span class="pp-tab">Vendedor</span>
+          <span class="pp-tab">Simulador</span>
+        </div>
+        <span class="pp-vista-tag">vista ilustrativa</span>
+      </div>
+
+      <!-- KPI strip -->
+      <div class="pp-kpi-strip">
+        {KPIS.map(({ label, val, delta, up }) => (
+          <div class="pp-kpi">
+            <span class="pp-kpi-lbl">{label}</span>
+            <span class="pp-kpi-val">{val}</span>
+            <span class={`pp-kpi-delta ${up ? "up" : "dn"}`}>{up ? "▲" : "▼"} {delta}</span>
+          </div>
+        ))}
+        <div class="pp-kpi pp-kpi-ai">
+          <span class="pp-ai-pulse"></span>
+          <span class="pp-kpi-lbl">IA</span>
+          <span class="pp-kpi-val">activa</span>
+          <span class="pp-kpi-delta up">procesando</span>
+        </div>
+      </div>
+
+      <!-- Main body -->
+      <div class="pp-body">
+
+        <!-- Pipeline chart -->
+        <div class="pp-chart-col">
+          <div class="pp-col-hd">
+            <span class="pp-col-title">Pipeline por etapa</span>
+            <span class="pp-col-sub">Solution Selling</span>
+          </div>
+
+          <div class="pp-bars">
+            {STAGES.map(({ name, val, pct, count, col }) => (
+              <div class="pp-bar-row">
+                <span class="pp-sname">{name}</span>
+                <div class="pp-track">
+                  <div class="pp-fill" style={`width:${pct}%;background:${col}`}></div>
+                </div>
+                <span class="pp-sval">{val}</span>
+                <span class="pp-scount">{count}</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="pp-fc-row">
+            <span class="pp-fc-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"
+                style="width:13px;height:13px;display:inline;vertical-align:middle;margin-right:4px">
+                <path d="M3 3v18h18M7 16l4-4 4 4 4-6" />
+              </svg>
+              Forecast cerrado del mes
+            </span>
+            <span class="pp-fc-val">$890K</span>
+            <span class="pp-fc-delta">▲ +24% vs mes anterior</span>
+          </div>
+        </div>
+
+        <!-- Opportunity table -->
+        <div class="pp-table-col">
+          <div class="pp-col-hd">
+            <span class="pp-col-title">Oportunidades</span>
+            <span class="pp-ai-badge">
+              <i></i> IA activa
+            </span>
+          </div>
+
+          <div class="pp-tbl-head">
+            <span>#</span>
+            <span>Cuenta</span>
+            <span>Etapa</span>
+            <span>Prob.</span>
+            <span>Valor</span>
+          </div>
+
+          {OPPS.map(({ rank, name, stage, prob, val, c }) => (
+            <div class={`pp-opp ${c}`}>
+              <span class="pp-opp-rank">{rank}</span>
+              <span class="pp-opp-name">{name}</span>
+              <span class="pp-opp-stage">{stage}</span>
+              <div class="pp-opp-prob-wrap">
+                <div class="pp-opp-prob-bar">
+                  <div class={`pp-opp-prob-fill ${c}`} style={`width:${prob}%`}></div>
+                </div>
+                <span class={`pp-opp-prob-num ${c}`}>{prob}%</span>
+              </div>
+              <span class="pp-opp-val">{val}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.pp-section { background: var(--bg); }
+
+.pp-window {
+  margin-top: 48px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.09);
+  box-shadow: 0 24px 72px -16px rgba(0,0,0,.6), 0 8px 24px -8px rgba(0,0,0,.4);
+  background: #070c18;
+  font-family: "Roboto", system-ui, sans-serif;
+}
+
+/* Chrome */
+.pp-chrome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #0c1322;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.pp-dots { display: flex; gap: 6px; align-items: center; }
+.pp-addr {
+  font-size: 11.5px;
+  color: #5a7492;
+  margin-left: 4px;
+  font-weight: 500;
+  flex: 1;
+}
+.pp-tabs { display: flex; gap: 2px; }
+.pp-tab {
+  font-size: 12px;
+  font-weight: 500;
+  color: #4a6078;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: default;
+}
+.pp-tab.active {
+  color: #c4d4e6;
+  background: rgba(255,255,255,.07);
+}
+.pp-vista-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #4a6078;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+/* KPI strip */
+.pp-kpi-strip {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  overflow-x: auto;
+}
+.pp-kpi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 12px 20px;
+  border-right: 1px solid rgba(255,255,255,.05);
+  min-width: 130px;
+  flex: 1;
+}
+.pp-kpi-lbl {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .03em;
+  color: #5a7492;
+  text-transform: uppercase;
+}
+.pp-kpi-val {
+  font-size: 17px;
+  font-weight: 800;
+  color: #e8f0fb;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+.pp-kpi-delta {
+  font-size: 10px;
+  font-weight: 700;
+}
+.pp-kpi-delta.up { color: #5fd07f; }
+.pp-kpi-delta.dn { color: #f4655a; }
+.pp-kpi-ai {
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+}
+.pp-ai-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5fd07f;
+  flex: none;
+  animation: pp-pulse 2s ease-in-out infinite;
+}
+@keyframes pp-pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* Body */
+.pp-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 300px;
+}
+
+/* Chart column */
+.pp-chart-col {
+  padding: 20px 24px;
+  border-right: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pp-col-hd {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.pp-col-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #c4d4e6;
+  letter-spacing: .01em;
+}
+.pp-col-sub {
+  font-size: 10.5px;
+  color: #4a6078;
+  font-weight: 500;
+}
+
+.pp-bars { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.pp-bar-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 52px 28px;
+  align-items: center;
+  gap: 10px;
+}
+.pp-sname {
+  font-size: 11.5px;
+  color: #7d95b0;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.pp-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  overflow: hidden;
+}
+.pp-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width .6s ease;
+}
+.pp-sval {
+  font-size: 11px;
+  font-weight: 700;
+  color: #a8c0d8;
+  text-align: right;
+}
+.pp-scount {
+  font-size: 10px;
+  color: #4a6078;
+  text-align: center;
+  background: rgba(255,255,255,.05);
+  border-radius: 4px;
+  padding: 1px 4px;
+}
+
+.pp-fc-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(47,158,68,.08);
+  border: 1px solid rgba(47,158,68,.20);
+  border-radius: 8px;
+  margin-top: auto;
+}
+.pp-fc-label {
+  font-size: 11.5px;
+  color: #7d95b0;
+  font-weight: 500;
+  flex: 1;
+}
+.pp-fc-val {
+  font-size: 16px;
+  font-weight: 800;
+  color: #5fd07f;
+  letter-spacing: -.02em;
+}
+.pp-fc-delta {
+  font-size: 10px;
+  font-weight: 700;
+  color: #5fd07f;
+  white-space: nowrap;
+}
+
+/* Table column */
+.pp-table-col {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pp-ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #5fd07f;
+  background: rgba(95,208,127,.10);
+  border: 1px solid rgba(95,208,127,.22);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.pp-ai-badge i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #5fd07f;
+  display: block;
+  animation: pp-pulse 2s ease-in-out infinite;
+}
+
+.pp-tbl-head {
+  display: grid;
+  grid-template-columns: 22px 1fr 90px 80px 52px;
+  gap: 8px;
+  padding: 4px 8px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #3d5470;
+}
+
+.pp-opp {
+  display: grid;
+  grid-template-columns: 22px 1fr 90px 80px 52px;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 8px;
+  border-radius: 6px;
+  transition: background .15s;
+}
+.pp-opp:hover { background: rgba(255,255,255,.04); }
+.pp-opp-rank {
+  font-size: 11px;
+  font-weight: 800;
+  color: #4a6078;
+  text-align: center;
+}
+.pp-opp-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #c4d4e6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pp-opp-stage {
+  font-size: 10.5px;
+  color: #5a7492;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pp-opp-prob-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pp-opp-prob-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  overflow: hidden;
+}
+.pp-opp-prob-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+.pp-opp-prob-fill.hot  { background: #5fd07f; }
+.pp-opp-prob-fill.warm { background: #f5bd4f; }
+.pp-opp-prob-fill.cold { background: #f4655a; }
+.pp-opp-prob-num {
+  font-size: 10.5px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.pp-opp-prob-num.hot  { color: #5fd07f; }
+.pp-opp-prob-num.warm { color: #f5bd4f; }
+.pp-opp-prob-num.cold { color: #f4655a; }
+.pp-opp-val {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #a8c0d8;
+  text-align: right;
+}
+
+@media (max-width: 860px) {
+  .pp-body { grid-template-columns: 1fr; }
+  .pp-chart-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .pp-tabs { display: none; }
+  .pp-tbl-head,
+  .pp-opp { grid-template-columns: 22px 1fr 80px 52px; }
+  .pp-opp-stage { display: none; }
+  .pp-tbl-head span:nth-child(3) { display: none; }
+}
+</style>

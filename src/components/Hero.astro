@@ -1,0 +1,105 @@
+---
+import DashboardPreview from './DashboardPreview.astro';
+
+const MSGS = [
+  "IA que clasifica tus oportunidades por probabilidad de cierre.",
+  "Deja de administrar datos. Empieza a predecir resultados.",
+  "El anti-CRM: menos ingreso, más inteligencia comercial.",
+  "Para vendedores y gerentes que quieren certeza, no reportes.",
+  "Forecast preciso sin hojas de cálculo ni reuniones de seguimiento.",
+];
+---
+
+<section id="inicio" class="hero v-split">
+  <div class="hero-glow"></div>
+  <div class="sec-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 680" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ha1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1f6fe5" stop-opacity="0.14"/>
+          <stop offset="100%" stop-color="#1f6fe5" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="ha2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2f9e44" stop-opacity="0.10"/>
+          <stop offset="100%" stop-color="#2f9e44" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- Blue area chart, right half -->
+      <path d="M700,560 780,530 880,518 980,495 1080,478 1180,450 1280,435 1440,410 L1440,680 L700,680 Z" fill="url(#ha1)"/>
+      <polyline points="700,560 780,530 880,518 980,495 1080,478 1180,450 1280,435 1440,410"
+        fill="none" stroke="#1f6fe5" stroke-width="1.5" stroke-opacity="0.22"/>
+      <circle cx="780"  cy="530" r="3" fill="#1f6fe5" fill-opacity="0.35"/>
+      <circle cx="880"  cy="518" r="3" fill="#1f6fe5" fill-opacity="0.35"/>
+      <circle cx="980"  cy="495" r="3" fill="#1f6fe5" fill-opacity="0.35"/>
+      <circle cx="1080" cy="478" r="3" fill="#1f6fe5" fill-opacity="0.35"/>
+      <circle cx="1180" cy="450" r="3" fill="#1f6fe5" fill-opacity="0.35"/>
+      <circle cx="1280" cy="435" r="3" fill="#1f6fe5" fill-opacity="0.35"/>
+      <!-- Green secondary line, full width -->
+      <path d="M0,620 120,600 280,585 420,570 560,552 700,538 860,520 1040,502 1200,480 1440,455 L1440,680 L0,680 Z" fill="url(#ha2)"/>
+      <polyline points="0,620 120,600 280,585 420,570 560,552 700,538 860,520 1040,502 1200,480 1440,455"
+        fill="none" stroke="#2f9e44" stroke-width="1" stroke-opacity="0.18" stroke-dasharray="5 7"/>
+      <!-- Scatter dots left side -->
+      <circle cx="85"  cy="430" r="2.5" fill="#1f6fe5" fill-opacity="0.2"/>
+      <circle cx="165" cy="395" r="2"   fill="#2f9e44" fill-opacity="0.2"/>
+      <circle cx="240" cy="415" r="2.5" fill="#1f6fe5" fill-opacity="0.18"/>
+      <circle cx="310" cy="380" r="2"   fill="#2f9e44" fill-opacity="0.18"/>
+      <circle cx="390" cy="360" r="2.5" fill="#1f6fe5" fill-opacity="0.15"/>
+      <!-- Vertical grid lines, faint -->
+      <line x1="360"  y1="0" x2="360"  y2="680" stroke="#1f6fe5" stroke-width="0.5" stroke-opacity="0.04"/>
+      <line x1="720"  y1="0" x2="720"  y2="680" stroke="#1f6fe5" stroke-width="0.5" stroke-opacity="0.04"/>
+      <line x1="1080" y1="0" x2="1080" y2="680" stroke="#1f6fe5" stroke-width="0.5" stroke-opacity="0.04"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Inteligencia Comercial con IA</span>
+        <h1>Menos administración.<br />Más ventas.</h1>
+        <p class="lede">
+          Sabe exactamente qué oportunidades cerrarás y cuánto facturarás este mes.
+          La IA lo analiza por ti. Sin la complejidad de un CRM.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="https://app.miforecast.com/registro.html" target="_blank" rel="noopener">
+            Pruébalo gratis
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#servicio">Ver cómo funciona</a>
+        </div>
+        <div class="hero-rot">
+          <span class="tick">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+          </span>
+          <span class="msg">{MSGS[0]}</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <DashboardPreview float={true} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const MSGS = [
+    "IA que clasifica tus oportunidades por probabilidad de cierre.",
+    "Deja de administrar datos. Empieza a predecir resultados.",
+    "El anti-CRM: menos ingreso, más inteligencia comercial.",
+    "Para vendedores y gerentes que quieren certeza, no reportes.",
+    "Forecast preciso sin hojas de cálculo ni reuniones de seguimiento.",
+  ];
+  const msgEl = document.querySelector('.hero-rot .msg');
+  if (msgEl) {
+    let mi = 0;
+    setInterval(() => {
+      mi = (mi + 1) % MSGS.length;
+      msgEl.textContent = MSGS[mi];
+    }, 3200);
+  }
+</script>

@@ -1,0 +1,12 @@
+---
+const LOGOS = ["Besalco", "Xstrata", "Salfa", "Confuturo", "Bechtle", "Innova"];
+---
+
+<div class="logo-strip">
+  <div class="wrap">
+    <p class="logo-strip-label">Empresas que ya venden más con MiForecast</p>
+    <div class="logo-strip-grid">
+      {LOGOS.map((name) => <span class="logo-strip-item">{name}</span>)}
+    </div>
+  </div>
+</div>

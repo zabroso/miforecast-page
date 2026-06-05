@@ -1,0 +1,105 @@
+---
+const PLANS = [
+  {
+    name: "Plan Trimestral",
+    amt: "14,90",
+    feats: ["Acceso panel de ventas", "Simulador de ventas", "Dashboard"],
+    featured: false,
+  },
+  {
+    name: "Plan Anual",
+    amt: "9,80",
+    feats: ["Acceso panel de ventas", "Simulador de ventas", "Costo por usuario más bajo", "Dashboard"],
+    featured: true,
+    pill: "Mejor precio",
+  },
+  {
+    name: "Plan Semestral",
+    amt: "12,50",
+    feats: ["Acceso panel de ventas", "Simulador de ventas", "Dashboard"],
+    featured: false,
+  },
+];
+---
+
+<section id="planes" class="sec reveal">
+  <div class="sec-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="pl1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2f9e44" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#2f9e44" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="pl2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1f6fe5" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#1f6fe5" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- Main growth area chart across full width -->
+      <path d="M0,640 160,608 320,578 480,545 640,510 800,472 960,430 1120,385 1280,338 1440,288 L1440,720 L0,720 Z"
+        fill="url(#pl1)"/>
+      <polyline points="0,640 160,608 320,578 480,545 640,510 800,472 960,430 1120,385 1280,338 1440,288"
+        fill="none" stroke="#2f9e44" stroke-width="2" stroke-opacity="0.20"/>
+      <!-- Secondary blue area, offset -->
+      <path d="M0,680 200,658 400,635 600,610 800,582 1000,550 1200,515 1440,478 L1440,720 L0,720 Z"
+        fill="url(#pl2)"/>
+      <polyline points="0,680 200,658 400,635 600,610 800,582 1000,550 1200,515 1440,478"
+        fill="none" stroke="#1f6fe5" stroke-width="1.2" stroke-opacity="0.14" stroke-dasharray="4 6"/>
+      <!-- Data point highlights -->
+      <circle cx="320"  cy="578" r="3.5" fill="#2f9e44" fill-opacity="0.30"/>
+      <circle cx="640"  cy="510" r="3.5" fill="#2f9e44" fill-opacity="0.30"/>
+      <circle cx="960"  cy="430" r="4"   fill="#2f9e44" fill-opacity="0.35"/>
+      <circle cx="1280" cy="338" r="4.5" fill="#2f9e44" fill-opacity="0.40"/>
+      <!-- Horizontal reference lines -->
+      <line x1="0" y1="480" x2="1440" y2="480" stroke="#2f9e44" stroke-width="0.5" stroke-opacity="0.06"/>
+      <line x1="0" y1="360" x2="1440" y2="360" stroke="#2f9e44" stroke-width="0.5" stroke-opacity="0.06"/>
+      <line x1="0" y1="240" x2="1440" y2="240" stroke="#2f9e44" stroke-width="0.5" stroke-opacity="0.04"/>
+      <!-- Vertical bar silhouettes, top area -->
+      <rect x="60"   y="0" width="18" height="180" fill="#1f6fe5" fill-opacity="0.03"/>
+      <rect x="200"  y="0" width="18" height="220" fill="#1f6fe5" fill-opacity="0.03"/>
+      <rect x="340"  y="0" width="18" height="160" fill="#2f9e44" fill-opacity="0.03"/>
+      <rect x="480"  y="0" width="18" height="240" fill="#2f9e44" fill-opacity="0.04"/>
+      <rect x="620"  y="0" width="18" height="200" fill="#1f6fe5" fill-opacity="0.03"/>
+      <rect x="760"  y="0" width="18" height="180" fill="#2f9e44" fill-opacity="0.03"/>
+      <rect x="900"  y="0" width="18" height="260" fill="#2f9e44" fill-opacity="0.04"/>
+      <rect x="1040" y="0" width="18" height="220" fill="#1f6fe5" fill-opacity="0.03"/>
+      <rect x="1180" y="0" width="18" height="195" fill="#2f9e44" fill-opacity="0.04"/>
+      <rect x="1320" y="0" width="18" height="280" fill="#2f9e44" fill-opacity="0.05"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker-tag">Nuestros Planes</span>
+      <h2>Precio por usuario, sin complicaciones</h2>
+      <p>Comienza tu prueba gratuita de 15 días. Todos los planes incluyen panel de ventas, simulador y dashboard.</p>
+    </div>
+    <div class="price-grid">
+      {PLANS.map((p) => (
+        <div class={`price ${p.featured ? "feat-plan" : ""}`}>
+          {p.pill && <span class="pill">{p.pill}</span>}
+          <div class="pname">{p.name}</div>
+          <div class="pprice">
+            <span class="cur">USD</span><span class="amt">{p.amt}</span>
+          </div>
+          <div class="pper">mensual por usuario</div>
+          <ul class="pfeat">
+            {p.feats.map((f) => (
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  style="width:14px;height:14px;flex:none">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <a class={`btn ${p.featured ? "btn-primary" : "btn-ghost"}`}
+             href="https://app.miforecast.com/registro.html" target="_blank" rel="noopener">
+            Pruébalo gratis
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
